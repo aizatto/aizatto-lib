@@ -1,0 +1,14 @@
+{
+  "name": "@aizatto/lib",
+  "version": "0.0.2",
+  "main": "build/index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "*",
+    "typescript": "*"
+  },
+  "optionalDependencies": {
+    "fs-extra": "*",
+    "node-fetch": "*"
+  }
+}
