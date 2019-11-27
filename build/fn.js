@@ -61,4 +61,24 @@ function setEqual(a, b) {
     return true;
 }
 exports.setEqual = setEqual;
+function isValidDateString(date) {
+    var match = date.match(/(\d{4})-(\d{2})-(\d{2})/);
+    if (!match) {
+        throw new Error("Invalid date: " + date);
+    }
+    var year = parseInt(match[1]);
+    var month = parseInt(match[2]);
+    var day = parseInt(match[3]);
+    if (month > 12) {
+        throw new Error("Invalid date: " + date);
+    }
+    if (day > 31) {
+        throw new Error("Invalid date: " + date);
+    }
+    if (isNaN(Date.parse(year + "-" + month + "-" + day))) {
+        throw new Error("Invalid date: " + date);
+    }
+    return date;
+}
+exports.isValidDateString = isValidDateString;
 //# sourceMappingURL=fn.js.map

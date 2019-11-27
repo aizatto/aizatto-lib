@@ -16,3 +16,28 @@ export function setEqual<T>(a: Set<T>, b: Set<T>): boolean {
   }
   return true;
 }
+
+export function isValidDateString(date: string): string {
+  const match = date.match(/(\d{4})-(\d{2})-(\d{2})/)
+  if (!match) {
+    throw new Error(`Invalid date: ${date}`);
+  }
+
+  const year = parseInt(match[1]);
+  const month = parseInt(match[2]);
+  const day = parseInt(match[3]);
+
+  if (month > 12) {
+    throw new Error(`Invalid date: ${date}`);
+  }
+
+  if (day > 31) {
+    throw new Error(`Invalid date: ${date}`);
+  }
+
+  if (isNaN(Date.parse(`${year}-${month}-${day}`))) {
+    throw new Error(`Invalid date: ${date}`);
+  }
+
+  return date;
+}
