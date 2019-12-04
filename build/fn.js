@@ -31,6 +31,7 @@ var __values = (this && this.__values) || function(o) {
     throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var url = require("url");
 function setMath(a, b) {
     return {
         remove: __spread(a).filter(function (x) { return !b.has(x); }),
@@ -81,4 +82,50 @@ function isValidDateString(date) {
     return date;
 }
 exports.isValidDateString = isValidDateString;
+/**
+ * Scenarios:
+ * * urlA has hostname, urlB does not have hostname
+ *
+ * TODO: replace this logic, it is really basic
+ */
+function compareURL(stringA, stringB) {
+    var urlA = url.parse(stringA);
+    var urlB = url.parse(stringB);
+    new Set([
+        'protocol',
+        'host',
+        'hostname',
+        'path',
+        'port',
+    ]).forEach(function (key) {
+        var aValue = urlA[key];
+        var bValue = urlB[key];
+        if (key === 'port') {
+            if (aValue === null && urlA.protocol) {
+                aValue = getDefaultPort(urlA.protocol);
+            }
+            if (bValue === null && urlB.protocol) {
+                bValue = getDefaultPort(urlB.protocol);
+            }
+        }
+        if (aValue && !bValue) {
+            urlB[key] = aValue;
+        }
+        else if (!aValue && bValue) {
+            urlA[key] = bValue;
+        }
+    });
+    return url.format(urlA) === url.format(urlB);
+}
+exports.compareURL = compareURL;
+function getDefaultPort(protocol) {
+    switch (protocol) {
+        case 'http:':
+            return 80;
+        case 'https:':
+            return 443;
+        default:
+            return null;
+    }
+}
 //# sourceMappingURL=fn.js.map
