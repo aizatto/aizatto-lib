@@ -19,7 +19,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn run tsc"
+      "pre-commit": "yarn run tsc && yarn run pretty-quick --staged"
     }
   },
   "dependencies": {}

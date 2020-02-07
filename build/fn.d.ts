@@ -12,4 +12,6 @@ export declare function isValidDateString(date: string): string;
  */
 export declare function compareURL(stringA: string, stringB: string): Boolean;
 export declare function conjunction(sentences: string[]): string;
+export declare function dayOfYear(date: Date): Number;
+export declare function currentDaysOfYear(date: Date): Array<Number>;
 //# sourceMappingURL=fn.d.ts.map
