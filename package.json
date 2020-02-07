@@ -3,6 +3,12 @@
   "version": "0.0.8",
   "main": "build/fn.js",
   "license": "MIT",
+  "repository": "https://www.github.com/aizatto/aizatto-lib",
+  "author": {
+    "name": "Aizat Faiz",
+    "email": "aizat.faiz@gmail.com",
+    "url": "https://www.aizatto.com/"
+  },
   "scripts": {
     "prepare": "yarn run tsc"
   },
