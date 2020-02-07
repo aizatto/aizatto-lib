@@ -91,16 +91,10 @@ exports.isValidDateString = isValidDateString;
 function compareURL(stringA, stringB) {
     var urlA = url.parse(stringA);
     var urlB = url.parse(stringB);
-    new Set([
-        'protocol',
-        'host',
-        'hostname',
-        'path',
-        'port',
-    ]).forEach(function (key) {
+    new Set(["protocol", "host", "hostname", "path", "port"]).forEach(function (key) {
         var aValue = urlA[key];
         var bValue = urlB[key];
-        if (key === 'port') {
+        if (key === "port") {
             if (aValue === null && urlA.protocol) {
                 aValue = getDefaultPort(urlA.protocol);
             }
@@ -120,12 +114,27 @@ function compareURL(stringA, stringB) {
 exports.compareURL = compareURL;
 function getDefaultPort(protocol) {
     switch (protocol) {
-        case 'http:':
+        case "http:":
             return 80;
-        case 'https:':
+        case "https:":
             return 443;
         default:
             return null;
     }
 }
+function conjunction(sentences) {
+    var length = sentences.length;
+    var sentence = "";
+    for (var i = 0; i < length; i += 1) {
+        sentence += sentences[i];
+        if (i < length - 2) {
+            sentence += ", ";
+        }
+        else if (i === length - 2) {
+            sentence += ", and ";
+        }
+    }
+    return sentence;
+}
+exports.conjunction = conjunction;
 //# sourceMappingURL=fn.js.map

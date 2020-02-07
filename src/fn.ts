@@ -1,4 +1,4 @@
-import * as url from 'url';
+import * as url from "url";
 
 export function setMath<T>(a: Set<T>, b: Set<T>) {
   return {
@@ -20,7 +20,7 @@ export function setEqual<T>(a: Set<T>, b: Set<T>): boolean {
 }
 
 export function isValidDateString(date: string): string {
-  const match = date.match(/(\d{4})-(\d{2})-(\d{2})/)
+  const match = date.match(/(\d{4})-(\d{2})-(\d{2})/);
   if (!match) {
     throw new Error(`Invalid date: ${date}`);
   }
@@ -53,17 +53,11 @@ export function isValidDateString(date: string): string {
 export function compareURL(stringA: string, stringB: string): Boolean {
   const urlA = url.parse(stringA);
   const urlB = url.parse(stringB);
-  new Set([
-    'protocol',
-    'host',
-    'hostname',
-    'path',
-    'port',
-  ]).forEach((key) => {
+  new Set(["protocol", "host", "hostname", "path", "port"]).forEach(key => {
     let aValue = urlA[key];
     let bValue = urlB[key];
 
-    if (key === 'port') {
+    if (key === "port") {
       if (aValue === null && urlA.protocol) {
         aValue = getDefaultPort(urlA.protocol);
       }
@@ -85,13 +79,30 @@ export function compareURL(stringA: string, stringB: string): Boolean {
 
 function getDefaultPort(protocol) {
   switch (protocol) {
-    case 'http:':
+    case "http:":
       return 80;
 
-    case 'https:':
+    case "https:":
       return 443;
 
     default:
       return null;
   }
+}
+
+export function conjunction(sentences: string[]) {
+  const { length } = sentences;
+
+  let sentence = "";
+  for (let i = 0; i < length; i += 1) {
+    sentence += sentences[i];
+
+    if (i < length - 2) {
+      sentence += ", ";
+    } else if (i === length - 2) {
+      sentence += ", and ";
+    }
+  }
+
+  return sentence;
 }

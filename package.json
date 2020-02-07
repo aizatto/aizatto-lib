@@ -3,12 +3,24 @@
   "version": "0.0.6",
   "main": "build/fn.js",
   "license": "MIT",
+  "scripts": {
+    "prepare": "yarn run tsc"
+  },
   "devDependencies": {
     "@types/node": "*",
+    "husky": "*",
+    "prettier": "^1.19.1",
+    "pretty-quick": "^2.0.1",
     "typescript": "*"
   },
   "optionalDependencies": {
     "fs-extra": "*",
     "node-fetch": "*"
-  }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run tsc"
+    }
+  },
+  "dependencies": {}
 }

@@ -11,4 +11,5 @@ export declare function isValidDateString(date: string): string;
  * TODO: replace this logic, it is really basic
  */
 export declare function compareURL(stringA: string, stringB: string): Boolean;
+export declare function conjunction(sentences: string[]): string;
 //# sourceMappingURL=fn.d.ts.map
