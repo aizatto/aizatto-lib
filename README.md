@@ -4,6 +4,12 @@ My set of reusable JavaScript/TypeScript functions
 yarn add @aizatto/lib
 ```
 
+Functions:
+
+- `conjunction`
+- `setEqual`
+- `setMath`
+
 Other links:
 
 - https://www.npmjs.com/package/@aizatto/lib
