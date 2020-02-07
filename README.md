@@ -8,3 +8,4 @@ Other links:
 
 - https://www.npmjs.com/package/@aizatto/lib
 - https://github.com/aizatto/aizatto-lib
+- https://www.npmjs.com/~aizatto
