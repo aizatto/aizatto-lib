@@ -37,70 +37,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs_extra_1 = require("fs-extra");
-var node_fetch_1 = require("node-fetch");
-function fetchHTMLFromDevServer(devServer) {
-    return __awaiter(this, void 0, void 0, function () {
-        var response;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, node_fetch_1.default(devServer)];
+var assets_1 = require("./assets");
+describe("should parse", function () {
+    it('readFile', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var html, _a, links, scripts;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0: return [4 /*yield*/, fs_extra_1.readFile(__dirname + '/assets.stub.html')];
                 case 1:
-                    response = _a.sent();
-                    if (!response.ok) {
-                        return [2 /*return*/, null];
-                    }
-                    return [2 /*return*/, response.text()];
+                    html = _b.sent();
+                    _a = assets_1.scrapeProduction(html.toString()), links = _a.links, scripts = _a.scripts;
+                    expect(links).toHaveLength(2);
+                    expect(scripts).toHaveLength(3);
+                    return [2 /*return*/];
             }
         });
-    });
-}
-function scrapeHTML(html) {
-    var scripts = html.match(/<script.*<\/script>/g);
-    return {
-        scripts: scripts,
-        links: [],
-    };
-}
-exports.scrapeHTML = scrapeHTML;
-/**
- * We don't use an `if` condition so tha we can test this function in isolation
- */
-function scrapeProduction(html) {
-    var scripts = html.match(/<script.*<\/script>/g);
-    var links = html.match(/<link\s+href="[^"]*"\s+rel="stylesheet">/g);
-    return {
-        scripts: scripts,
-        links: links,
-    };
-}
-exports.scrapeProduction = scrapeProduction;
-function fetchAssets(devServer, buildFile) {
-    return __awaiter(this, void 0, void 0, function () {
-        var buffer, html, assets, html, assets;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    if (!(process.env.NODE_ENV === "production")) return [3 /*break*/, 2];
-                    return [4 /*yield*/, fs_extra_1.readFile(buildFile)];
-                case 1:
-                    buffer = _a.sent();
-                    html = buffer.toString();
-                    assets = scrapeProduction(html);
-                    return [2 /*return*/, {
-                            scripts: assets.scripts.join(''),
-                            links: assets.links.join(''),
-                        }];
-                case 2: return [4 /*yield*/, fetchHTMLFromDevServer(devServer)];
-                case 3:
-                    html = _a.sent();
-                    assets = scrapeHTML(html);
-                    return [2 /*return*/, {
-                            scripts: assets.scripts.join(''),
-                            links: assets.links.join(''),
-                        }];
-            }
-        });
-    });
-}
-exports.fetchAssets = fetchAssets;
-//# sourceMappingURL=assets.js.map
+    }); });
+});
+//# sourceMappingURL=assets.test.js.map
